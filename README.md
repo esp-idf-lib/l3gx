@@ -11,7 +11,7 @@ Driver for L3Gx(L3GD20/L3G4200D) 3-axis gyroscope sensors.
 ## Installation
 
 ```sh
-idf.py add-dependency "esp-idf-lib/l3gx^1.0.0
+idf.py add-dependency esp-idf-lib/l3gx^1.0.0
 ```
 
 ## Support
