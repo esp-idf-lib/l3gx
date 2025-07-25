@@ -1,5 +1,9 @@
 # esp-idf-lib/l3gx
 
+[![Build examples](https://github.com/esp-idf-lib/l3gx/actions/workflows//build.yml/badge.svg)](https://github.com/esp-idf-lib/l3gx/actions/workflows//build.yml)
+[![Build docs](https://github.com/esp-idf-lib/l3gx/actions/workflows//build-docs.yml/badge.svg)](https://github.com/esp-idf-lib/l3gx/actions/workflows//build-docs.yml)
+[![Validation](https://github.com/esp-idf-lib/l3gx/actions/workflows//validate-component.yml/badge.svg)](https://github.com/esp-idf-lib/l3gx/actions/workflows//validate-component.yml)
+
 Driver for L3Gx(L3GD20/L3G4200D) 3-axis gyroscope sensors.
 
 * [Documentation](https://esp-idf-lib.github.io/l3gx/)
@@ -11,7 +15,7 @@ Driver for L3Gx(L3GD20/L3G4200D) 3-axis gyroscope sensors.
 ## Installation
 
 ```sh
-idf.py add-dependency esp-idf-lib/l3gx^1.0.0
+idf.py add-dependency esp-idf-lib/l3gx
 ```
 
 ## Support
