@@ -1,5 +1,5 @@
 ---
-version: 1.0.0
+version: 1.0.1
 description: Driver for L3Gx(L3GD20/L3G4200D) 3-axis gyroscope sensors
 license: BSD-3
 targets:
