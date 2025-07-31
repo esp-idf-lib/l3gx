@@ -159,11 +159,13 @@ esp_err_t l3gx_init(l3gx_t *dev)
     int type;
     uint8_t v = 0;
 
-    static const uint8_t expected_ids[] = {
+    static const uint8_t expected_ids[] =
+    {
         [L3GX_TYPE_L3G4200D] = L3G4200D_WHO_AM_I_ID,
         [L3GX_TYPE_L3GD20] = L3GD20_WHO_AM_I_ID
     };
-    static const char *sensor_type_str[] = {
+    static const char *sensor_type_str[] =
+    {
         [L3GX_TYPE_L3G4200D] = "L3G4200D",
         [L3GX_TYPE_L3GD20] = "L3GD20"
     };
@@ -210,45 +212,45 @@ esp_err_t l3gx_init(l3gx_t *dev)
                 10 Normal mode
                 11 Autoreset on interrupt event
         [3:0] HPCF3, HPCF2, HPCF1, HPCF0 - High Pass filter Cut Off frequency selection:
-                HPCF3	ODR= 100 Hz ODR= 200 Hz ODR= 400 Hz ODR= 800 Hz
-                0000	8			15			30			56
-                0001	4			8			15			30
-                0010	2			4			8			15
-                0011	1			2			4			8
-                0100	0.5			1			2			4
-                0101	0.2			0.5			1			2
-                0110	0.1			0.2			0.5			1
-                0111	0.05		0.1			0.2			0.5
-                1000	0.02		0.05		0.1			0.2
-                1001	0.01		0.02		0.05		0.1
+                HPCF3   ODR= 100 Hz ODR= 200 Hz ODR= 400 Hz ODR= 800 Hz
+                0000    8           15          30          56
+                0001    4           8           15          30
+                0010    2           4           8           15
+                0011    1           2           4           8
+                0100    0.5         1           2           4
+                0101    0.2         0.5         1           2
+                0110    0.1         0.2         0.5         1
+                0111    0.05        0.1         0.2         0.5
+                1000    0.02        0.05        0.1         0.2
+                1001    0.01        0.02        0.05        0.1
     */
 
     v = 0x00;
     I2C_DEV_CHECK(&dev->i2c_dev, i2c_dev_write_reg(&dev->i2c_dev, L3GX_REG_CTRL_REG2, &v, 1));
 
     /* setup CTRL_REG3
-        [7] I1_Int1		Interrupt enable on INT1 pin.				Default value: 0. (0: Disable; 1: Enable)
-        [6] I1_Boot		Boot status available on INT1.				Default value: 0. (0: Disable; 1: Enable)
-        [5] H_Lactive	Interrupt active configuration on INT1.		Default value: 0. (0: High; 1:Low)
-        [4] PP_OD		Push- Pull / Open drain.					Default value: 0. (0: Push- Pull; 1: Open drain)
-        [3] I2_DRDY		Date Ready on DRDY/INT2.					Default value: 0. (0: Disable; 1: Enable)
-        [2] I2_WTM		FIFO Watermark interrupt on DRDY/INT2.		Default value: 0. (0: Disable; 1: Enable)
-        [1] I2_ORun		FIFO Overrun interrupt on DRDY/INT2			Default value: 0. (0: Disable; 1: Enable)
-        [0] I2_Empty	FIFO Empty interrupt on DRDY/INT2.			Default value: 0. (0: Disable; 1: Enable)
+        [7] I1_Int1     Interrupt enable on INT1 pin.               Default value: 0. (0: Disable; 1: Enable)
+        [6] I1_Boot     Boot status available on INT1.              Default value: 0. (0: Disable; 1: Enable)
+        [5] H_Lactive   Interrupt active configuration on INT1.     Default value: 0. (0: High; 1:Low)
+        [4] PP_OD       Push- Pull / Open drain.                    Default value: 0. (0: Push- Pull; 1: Open drain)
+        [3] I2_DRDY     Date Ready on DRDY/INT2.                    Default value: 0. (0: Disable; 1: Enable)
+        [2] I2_WTM      FIFO Watermark interrupt on DRDY/INT2.      Default value: 0. (0: Disable; 1: Enable)
+        [1] I2_ORun     FIFO Overrun interrupt on DRDY/INT2         Default value: 0. (0: Disable; 1: Enable)
+        [0] I2_Empty    FIFO Empty interrupt on DRDY/INT2.          Default value: 0. (0: Disable; 1: Enable)
     */
     v = 0x00;
     I2C_DEV_CHECK(&dev->i2c_dev, i2c_dev_write_reg(&dev->i2c_dev, L3GX_REG_CTRL_REG3, &v, 1));
 
     /* setup CTRL_REG4
-        [7]		BDU			- Block Data Update.						Default value: 0	(0: continous update; 1: output registers not updated until MSB and LSB reading)
-        [6]		BLE			- Big/Little Endian Data Selection.			Default value: 0.
-        [5:4]	FS1 FS0		- Full Scale selection.						Default value: 00	(00: 250 dps; 01: 500 dps; 10: 2000 dps; 11: 2000 dps) ST1-ST0 Self Test Enable. Default value: 00
-                    +/- 250DPS		-> 8.75 mDPS/LSB
-                    +/- 1000DPS		-> 17.5 mDPS/LSB
-                    +/- 2000DPS		-> 70.0 mDPS/LSB
-        [3]		RESERVED	-
-        [2:1]	ST1 ST0		- Self Test Enable.							Default value: 00	(00: Self Test Disabled;)
-        [0]		SIM			- SIM SPI Serial Interface Mode selection.	Default value: 0	(0: 4-wire interface; 1: 3-wire interface).
+        [7]     BDU         - Block Data Update.                        Default value: 0    (0: continous update; 1: output registers not updated until MSB and LSB reading)
+        [6]     BLE         - Big/Little Endian Data Selection.         Default value: 0.
+        [5:4]   FS1 FS0     - Full Scale selection.                     Default value: 00   (00: 250 dps; 01: 500 dps; 10: 2000 dps; 11: 2000 dps) ST1-ST0 Self Test Enable. Default value: 00
+                    +/- 250DPS      -> 8.75 mDPS/LSB
+                    +/- 1000DPS     -> 17.5 mDPS/LSB
+                    +/- 2000DPS     -> 70.0 mDPS/LSB
+        [3]     RESERVED    -
+        [2:1]   ST1 ST0     - Self Test Enable.                         Default value: 00   (00: Self Test Disabled;)
+        [0]     SIM         - SIM SPI Serial Interface Mode selection.  Default value: 0    (0: 4-wire interface; 1: 3-wire interface).
 
     */
     v = 0x00;
@@ -257,12 +259,12 @@ esp_err_t l3gx_init(l3gx_t *dev)
     I2C_DEV_CHECK(&dev->i2c_dev, i2c_dev_write_reg(&dev->i2c_dev, L3GX_REG_CTRL_REG4, &v, 1));
 
     /* setup CTRL_REG5
-        [7] BOOT						Reboot memory content.			Default value: 0 (0: normal mode; 1: reboot memory content)
-        [6] FIFO_EN						FIFO_EN FIFO enable.			Default value: 0 (0: FIFO disable; 1: FIFO Enable)
-        [5] RESERVED					-
-        [4] HPen						HPen High Pass filter Enable.	Default value: 0 (0: HPF disabled; 1: HPF enabled. See Figure 20)
-        [3:2] INT1_Sel1,	INT1_Sel0	INT1 selection configuration.	Default value: 0
-        [1:0] Out_Sel1, Out_Sel0		Out selection configuration.	Default value: 0
+        [7] BOOT                        Reboot memory content.          Default value: 0 (0: normal mode; 1: reboot memory content)
+        [6] FIFO_EN                     FIFO_EN FIFO enable.            Default value: 0 (0: FIFO disable; 1: FIFO Enable)
+        [5] RESERVED                    -
+        [4] HPen                        HPen High Pass filter Enable.   Default value: 0 (0: HPF disabled; 1: HPF enabled. See Figure 20)
+        [3:2] INT1_Sel1,    INT1_Sel0   INT1 selection configuration.   Default value: 0
+        [1:0] Out_Sel1, Out_Sel0        Out selection configuration.    Default value: 0
     */
     v = 0x00;
     I2C_DEV_CHECK(&dev->i2c_dev, i2c_dev_write_reg(&dev->i2c_dev, L3GX_REG_CTRL_REG5, &v, 1));
@@ -333,7 +335,8 @@ esp_err_t l3gx_get_raw_data(l3gx_t *dev, l3gx_raw_data_t *raw)
 esp_err_t l3gd20_raw_to_dps(l3gx_t *dev, l3gx_raw_data_t *raw, l3gx_data_t *data)
 {
     /* sensitivity factors, datasheet pg. 9 */
-    static const float sensivity_factors[] = {
+    static const float sensivity_factors[] =
+    {
         [L3GX_SCALE_250] = 0.00875, // 8.75 mdps/digit
         [L3GX_SCALE_500] = 0.0175,  // 17.5 mdps/digit
         [L3GX_SCALE_2000] = 0.0700  // 70.0 mdps/digit

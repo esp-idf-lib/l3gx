@@ -63,7 +63,8 @@ typedef enum { L3GX_TYPE_L3G4200D, L3GX_TYPE_L3GD20, L3GX_TYPE_UNKNOWN } l3gx_se
 /**
  * Scales
  */
-typedef enum {
+typedef enum
+{
     L3GX_SCALE_250 = 0b00, // full scale to 250 dps
     L3GX_SCALE_500 = 0b01, // full scale to 500 dps
     L3GX_SCALE_2000 = 0b10 // full scale to 2000 dps
@@ -72,7 +73,8 @@ typedef enum {
 /**
  * Data rates and bandwith
  */
-typedef enum {
+typedef enum
+{
     L3GX_DRBW_100_125 = 0, // 100 Hz ODR, 12.5 Hz bandwidth
     L3GX_DRBW_100_25a,
     L3GX_DRBW_100_25b,
